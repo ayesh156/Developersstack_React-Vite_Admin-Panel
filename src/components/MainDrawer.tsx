@@ -5,20 +5,18 @@ import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar, {AppBarProps as MuiAppBarProps} from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import PersonIcon from '@mui/icons-material/Person';
 import {Inventory2, LocalMall} from "@mui/icons-material";
-import ProductPage from "./Product/ProductPage.tsx";
+import {Link, Outlet, useLocation} from "react-router-dom";
+import Button from '@mui/material/Button';
+import Stack from "@mui/material/Stack";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const drawerWidth = 240;
 
@@ -93,6 +91,10 @@ export default function MainDrawer() {
         setOpen(false);
     };
 
+    const location = useLocation();
+
+    console.log(location.pathname)
+
     return (
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
@@ -136,45 +138,92 @@ export default function MainDrawer() {
                     </IconButton>
                 </DrawerHeader>
                 <Divider/>
-                <List>
-                    <ListItem disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <PersonIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary={"Customer"}/>
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <Inventory2/>
-                            </ListItemIcon>
-                            <ListItemText primary={"Product"}/>
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <LocalMall />
-                            </ListItemIcon>
-                            <ListItemText primary={"Order"}/>
-                        </ListItemButton>
-                    </ListItem>
-                </List>
-                <Divider/>
-
+                <Stack
+                    spacing={2}
+                    mt={2}
+                    direction="column"
+                    marginLeft={2}
+                >
+                    <Button
+                        disableElevation
+                        varient={location.pathname === "/customer" ? "contained" : "text"}
+                        color="primary"
+                        fullWidth
+                        startIcon={<PersonIcon/>}
+                        sx={{
+                            display: "flex",
+                            justifyContent: "flex-start",
+                            color: location.pathname === "/customer" ? "primary" : "inherit",
+                        }}
+                    >
+                        <Link to="/customer" style={{
+                            textDecoration: "none",
+                            color: location.pathname === "/customer" ? "primary" : "inherit",
+                        }}>
+                            Customer
+                        </Link>
+                    </Button>
+                    <Button
+                        disableElevation
+                        varient="text"
+                        color="primary"
+                        fullWidth
+                        startIcon={<Inventory2/>}
+                        sx={{
+                            display: "flex",
+                            justifyContent: "flex-start",
+                            color: location.pathname === "/product" ? "primary" : "inherit",
+                        }}
+                    >
+                        <Link to="/product" style={{
+                            textDecoration: "none",
+                            color: location.pathname === "/product" ? "primary" : "inherit",
+                        }}>
+                            Product
+                        </Link>
+                    </Button>
+                    <Button
+                        disableElevation
+                        varient="text"
+                        color="primary"
+                        fullWidth
+                        startIcon={<LocalMall/>}
+                        sx={{
+                            display: "flex",
+                            justifyContent: "flex-start",
+                            color: location.pathname === "/order" ? "primary" : "inherit",
+                        }}
+                    >
+                        <Link to="/order" style={{
+                            textDecoration: "none",
+                            color: location.pathname === "/order" ? "primary" : "inherit",
+                        }}>
+                            Order
+                        </Link>
+                    </Button>
+                    <Divider/>
+                    <Button
+                        disableElevation
+                        varient="text"
+                        color="primary"
+                        fullWidth
+                        startIcon={<LogoutIcon />}
+                        sx={{
+                            display: "flex",
+                            justifyContent: "flex-start",
+                        }}
+                    >
+                        <Link to="/login" style={{
+                            textDecoration: "none",
+                        }}>
+                            Logout
+                        </Link>
+                    </Button>
+                </Stack>
             </Drawer>
             <Main open={open}>
                 <DrawerHeader/>
-
-                {/*<CustomerTable />*/}
-                {/*<Divider/>*/}
-                {/*<ProductTable />*/}
-                {/*<Divider/>*/}
-                {/*<OrderTable />*/}
-
-                <ProductPage />
+                <Outlet/>
             </Main>
         </Box>
     );
