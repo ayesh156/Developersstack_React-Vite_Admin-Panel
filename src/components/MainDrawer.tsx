@@ -146,7 +146,7 @@ export default function MainDrawer() {
                 >
                     <Button
                         disableElevation
-                        varient={location.pathname === "/customer" ? "contained" : "text"}
+                        variant={location.pathname === "/customer" ? "contained" : "text"}
                         color="primary"
                         fullWidth
                         startIcon={<PersonIcon/>}
@@ -165,7 +165,7 @@ export default function MainDrawer() {
                     </Button>
                     <Button
                         disableElevation
-                        varient="text"
+                        variant="text"
                         color="primary"
                         fullWidth
                         startIcon={<Inventory2/>}
@@ -184,7 +184,7 @@ export default function MainDrawer() {
                     </Button>
                     <Button
                         disableElevation
-                        varient="text"
+                        variant="text"
                         color="primary"
                         fullWidth
                         startIcon={<LocalMall/>}
@@ -204,7 +204,7 @@ export default function MainDrawer() {
                     <Divider/>
                     <Button
                         disableElevation
-                        varient="text"
+                        variant="text"
                         color="primary"
                         fullWidth
                         startIcon={<LogoutIcon />}
