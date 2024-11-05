@@ -6,7 +6,6 @@ import Stack from "@mui/material/Stack";
 import CssBaseline from "@mui/material/CssBaseline";
 import LoginIcon from '@mui/icons-material/Login';
 import {Link} from "react-router-dom";
-import * as React from "react";
 
 export default function LoginPage() {
 
